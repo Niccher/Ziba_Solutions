@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.php"><img src="img/logo.png" alt=""></a>
+                        <a href="./index.php"><img src="img/zibalogo.png" height="50px" alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -19,6 +19,15 @@
                             <li><a href="./cart.php">Cart</a></li>
                         </ul>
                     </nav>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li><i class="fa fa-user"></i></li>
+                        </ul>
+                        <div class="header__cart__price">Welcome: <span>User</span></div>
+                    </div>
                 </div>
                 
             </div>
@@ -37,20 +46,15 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>All Categories</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <li><a href="#">Vehicles</a></li>
+                            <li><a href="#">Property</a></li>
+                            <li><a href="#">Electronics</a></li>
+                            <li><a href="#">Fashion</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Services</a></li>
                         </ul>
                     </div>
                 </div>

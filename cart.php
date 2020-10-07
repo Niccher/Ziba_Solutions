@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.php"><img src="img/logo.png" alt=""></a>
+                        <a href="./index.php"><img src="img/zibalogo.png" height="50px" alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -20,7 +20,16 @@
                         </ul>
                     </nav>
                 </div>
-                
+
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li><i class="fa fa-user"></i></li>
+                        </ul>
+                        <div class="header__cart__price">Welcome: <span>User</span></div>
+                    </div>
+                </div>
+
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>

@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.php"><img src="img/logo.png" alt=""></a>
+                        <a href="./index.php"><img src="img/zibalogo.png" height="50px" alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -21,6 +21,15 @@
                             <li class="active"><a href="./checkout.php">Checkout</a></li>
                         </ul>
                     </nav>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="header__cart">
+                        <ul>
+                            <li><i class="fa fa-user"></i></li>
+                        </ul>
+                        <div class="header__cart__price">Welcome: <span>User</span></div>
+                    </div>
                 </div>
                 
             </div>
@@ -39,43 +48,21 @@
                 <form action="#">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Last Name<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                            </div>
                             
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
-                                <input type="text">
+                                <input type="text" placeholder="Town">
                             </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Phone<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="checkout__input">
-                                        <p>Email<span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                </div>
+
+                            <div class="checkout__input">
+                                <p>Phone<span>*</span></p>
+                                <input type="text" placeholder="Phone">
                             </div>
+
                             <div class="checkout__input__checkbox">
                                 <label for="diff-acc">
                                     Ship to a different address?
-                                    <input type="checkbox" id="diff-acc">
+                                    <input type="checkbox" id="diff-acc" placeholder="Ship to a different address?">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
