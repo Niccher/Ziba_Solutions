@@ -1,7 +1,3 @@
-<?php
- include_once 'template/header.php';
-?>
-
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
         <div class="container">
@@ -290,7 +286,3 @@
         </div>
     </section>
     <!-- Related Product Section End -->
-
-<?php
- include_once 'template/tail.php';
-?>

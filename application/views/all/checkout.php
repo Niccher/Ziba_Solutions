@@ -1,7 +1,7 @@
 <?php
- include_once 'template/header.php';
+    $logged_user =  $this->session->userdata('log_name');
+    $logged_type =  $this->session->userdata('log_type');
 ?>
-
 
     <!-- Header Section Begin -->
     <header class="header">
@@ -9,16 +9,21 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.php"><img src="img/zibalogo.png" height="50px" alt="Logo"></a>
+                        <a href="<?php echo base_url() ;?>"><img src="<?php echo base_url('assets/img/zibalogo.png') ;?>" height="50px" alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.php">Home</a></li>
-                            <li><a href="./services.php">Services</a></li>
-                            <li><a href="./cart.php">Cart</a></li>
-                            <li class="active"><a href="./checkout.php">Checkout</a></li>
+                            <li><a href="<?php echo base_url() ;?>">Home</a></li>
+                            <li><a href="<?php echo base_url('services') ;?>">Services</a></li>
+                            <li><a href="<?php echo base_url('cart') ;?>">Cart</a></li>
+                            <li class="active"><a href="<?php echo base_url('checkout') ;?>">Checkout</a></li>
+                            <?php
+                                if ($log_type = "Seller") {?>
+                                    <li><a href="<?php echo base_url('services/add');?>">Add Services</a></li>
+                                <?php }
+                            ?>
                         </ul>
                     </nav>
                 </div>
@@ -28,7 +33,12 @@
                         <ul>
                             <li><i class="fa fa-user"></i></li>
                         </ul>
-                        <div class="header__cart__price">Welcome: <span>User</span></div>
+
+                        <div class="header__cart__price">Welcome: 
+                            <span>
+                                <?php echo $logged_user; ?>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 
@@ -94,7 +104,3 @@
         </div>
     </section>
     <!-- Checkout Section End -->
-
-<?php
- include_once 'template/tail.php';
-?>
