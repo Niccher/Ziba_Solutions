@@ -17,8 +17,7 @@
                         <ul>
                             <li><a href="<?php echo base_url() ;?>">Home</a></li>
                             <li><a href="<?php echo base_url('services') ;?>">Services</a></li>
-                            <li><a href="<?php echo base_url('cart') ;?>">Cart</a></li>
-                            <li class="active"><a href="<?php echo base_url('checkout') ;?>">Checkout</a></li>
+                            <li class="active"><a href="<?php echo base_url('cart') ;?>">Cart</a></li>
                             <?php
                                 if ($log_type = "Seller") {?>
                                     <li><a href="<?php echo base_url('services/add');?>">Add Services</a></li>
@@ -87,15 +86,22 @@
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                <?php
+                                    $total = 0;
+                                    foreach ($work_cart as $work) : ?>
+                                        <?php 
+                                            $id = $work['Product'];
+                                            $data['work_inf'] = $this->mod_services->get_at($id);
+                                            $total = $total + $data['work_inf']['Fee'];
+?>
+                                            <li><?php echo $data['work_inf']["Name"]; ?> <span><?php echo 'Kshs '.$data['work_inf']["Fee"]; ?></span></li>
+                                        
+                                <?php endforeach; ?>
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua.</p>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <div class="checkout__order__total">Total 
+                                    <span><?php echo 'KShs '.$total.'/-' ?></span>
+                                </div>
+                                <button type="submit" class="site-btn">Place Order</button>
                             </div>
                         </div>
                     </div>

@@ -5,19 +5,26 @@ class Products extends CI_Controller {
 
 	public function add($page = 'add'){
 
-        if (!file_exists(APPPATH.'views/all/'.$page.'.php')) {
-            show_404();
-        }
+        $this->form_validation->set_rules('form_pdnm','Name','required');
+        $this->form_validation->set_rules('form_pdfee','Fee', 'required');
+        $this->form_validation->set_rules('form_pdloc','Location','required');
+        $this->form_validation->set_rules('form_pdspec','Specifications', 'required');
+        $this->form_validation->set_rules('form_pddesc','Description', 'required');
+        $this->form_validation->set_rules('form_pdcat','Category', 'required');
 
-        if (! $this->session->userdata('log_id')) {
-            redirect('login');
-        }
+        if($this->form_validation->run() === FALSE) {
+            $this->load->view('helper/header');
+            $this->load->view('all/'.$page);
+            $this->load->view('helper/tail');
+        }else{
 
-        $this->load->view('helper/header');
-        //$this->load->view('template/sidebar',$titl);
-        $this->load->view('all/'.$page);
-        $this->load->view('helper/tail');
-        $this->load->view('helper/dropzone');
+            $real_user =  $this->session->userdata('log_id');
+
+            $this->mod_services->make_product($real_user);
+            $this->session->set_flashdata("User_registered", "User created succesfully");
+
+            redirect('services');
+        }
 	}
 
 	public function edit($page = 'services'){
@@ -53,19 +60,33 @@ class Products extends CI_Controller {
     }
 
 
-	public function info($page = 'checkout'){
+	public function info($PId){
 
-        if (!file_exists(APPPATH.'views/all/'.$page.'.php')) {
+        if (!file_exists(APPPATH.'views/all/details.php')) {
             show_404();
         }
 
-        if (! $this->session->userdata('log_id')) {
-            redirect('login');
-        }
+        $data['work_info'] = $this->mod_services->get_at($PId);
 
         $this->load->view('helper/header');
-        //$this->load->view('template/sidebar',$titl);
-        $this->load->view('all/'.$page,$data);
+        $this->load->view('all/details',$data);
         $this->load->view('helper/tail');
 	}
+
+
+    public function cart($PId){
+
+        if (!file_exists(APPPATH.'views/all/details.php')) {
+            show_404();
+        }
+
+        $real_user =  $this->session->userdata('log_id');
+        $this->mod_services->get_cartin($real_user,$PId);
+
+        redirect('cart');
+
+        $this->load->view('helper/header');
+        $this->load->view('all/details',$data);
+        $this->load->view('helper/tail');
+    }
 }

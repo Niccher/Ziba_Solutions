@@ -2,6 +2,8 @@
     $logged_user =  $this->session->userdata('log_name');
     $logged_type =  $this->session->userdata('log_type');
 ?>
+
+
     <!-- Header Section Begin -->
     <header class="header">
         <div class="container">
@@ -51,8 +53,6 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/dropzone.min.css');?>" />
     
     <!-- Contact Form Begin -->
     <div class="contact-form spad">
@@ -64,52 +64,55 @@
                     </div>
                 </div>
             </div>
-            <form action="#">
+            <?php echo validation_errors(); ?>
+            <?php echo form_open('services/add'); ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                          <div class="checkout__input">
-                            <input type="text" name="form_lgpwd" placeholder="Product/Service Name">
+                            <input type="text" name="form_pdnm" placeholder="Product/Service Name">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="checkout__input">
-                            <input type="text" name="form_lgpwd" placeholder="Product/Service Fee">
+                            <input type="text" name="form_pdfee" placeholder="Product/Service Fee">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="checkout__input">
-                            <input type="text" name="form_lgpwd" placeholder="Available Locations">
+                            <input type="text" name="form_pdloc" placeholder="Available Locations">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="checkout__input">
-                            <input type="text" name="form_lgpwd" placeholder="Specifications">
+                            <input type="text" name="form_pdspec" placeholder="Specifications">
                         </div>
                     </div>
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-6 col-md-6">
                         <div class="checkout__input">
-                            <div class="dropzone well" id="dropzoneFrom">
-                            	<div class="dz-default dz-message">
-									<span>
-										<span class="bigger-150 bolder">
-											<i class="ace-icon fa fa-caret-right red"></i> Drop files
-										</span> to upload 				
-										<span class="smaller-80 grey">(or click)</span> <br> 				
-										<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>
-									</span>
-								</div>
-                            </div>
-                            <div>
-	                        	<span><a href="">File.file</a></span><br>
-	                        	<span><a href="">File.file</a></span><br>
-	                        	<span><a href="">File.file</a></span><br>
-	                        </div>
+                            <div class="form-group">
+						    	<select data-placeholder="Category" name="form_pdcat" class="chosen-select col-md-12 block" tabindex="18" required>
+					            	<option value='Vehicles'>Vehicles</option>
+					            	<option value='Property'>Property</option>
+					            	<option value='Electronics'>Electronics</option>
+					            	<option value='Fashion'>Fashion</option>
+					            	<option value='Sports'>Sports</option>
+					            	<option value='Services'>Services</option>
+					          </select>
+						    </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="checkout__input">
+                            <div class="checkout__input">
+                            <input type="file" id="files" name="files" multiple><br><br>
+                        </div>
                         </div>
                     </div>
 
                     <div class="col-lg-12 text-center">
-                        <textarea placeholder="Product/Service Description"></textarea>
+                        <textarea placeholder="Product/Service Description" name="form_pddesc"></textarea>
                         <button type="submit" class="site-btn">Create Product/Service</button>
                     </div>
                 </div>
