@@ -16,12 +16,18 @@
                         <ul>
                             <li class="active"><a href="<?php echo base_url();?>" >Home</a></li>
                             <li><a href="<?php echo base_url('services');?>">Services</a></li>
-                            <li><a href="<?php echo base_url('cart');?>">Cart</a></li>
-                            <?php
-                                if ($log_type = "Seller") {?>
-                                    <li><a href="<?php echo base_url('services/add');?>">Add Services</a></li>
-                                <?php }
+                            <?php 
+                                if ($logged_user == NULL) {
+                                }else{
+                                    $ct = base_url('cart');
+                                    $sv = base_url('services/add');
+                                    echo '<li><a href="'.$ct.'">Cart</a></li>';
+                                    if ($log_type = "Seller") {
+                                        echo '<li><a href="'.$sv.'">Add Services</a></li>';
+                                    }
+                                }
                             ?>
+                            
                         </ul>
                     </nav>
                 </div>
@@ -31,9 +37,14 @@
                         <ul>
                             <li><i class="fa fa-user"></i></li>
                         </ul>
-                        <div class="header__cart__price">Welcome: 
+                        <div class="header__cart__price">
                             <span>
-                                <?php echo $logged_user; ?>
+                                <?php 
+                                    if ($logged_user == NULL) {
+                                    }else{
+                                        echo 'Welcome: '.$logged_user; 
+                                    }
+                                ?>
                             </span>
                         </div>
                     </div>

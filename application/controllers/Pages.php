@@ -26,6 +26,7 @@ class Pages extends CI_Controller {
             //redirect('login');
         }
 
+        $data['cat'] = "";
         $data['work_posted'] = $this->mod_services->get_all();
 
         $this->load->view('helper/header');
@@ -67,6 +68,58 @@ class Pages extends CI_Controller {
 
         $this->load->view('helper/header');
         $this->load->view('all/'.$page,$data);
+        $this->load->view('helper/tail');
+    }
+
+    public function admin($page = 'admin'){
+
+        if (!file_exists(APPPATH.'views/admin/'.$page.'.php')) {
+            show_404();
+        }
+
+        if (! $this->session->userdata('log_id')) {
+            redirect('login_admin');
+        }
+
+        $data['user_list'] = $this->mod_user->get_usas();
+
+        $this->load->view('helper/header');
+        $this->load->view('admin/'.$page,$data);
+        $this->load->view('helper/tail');
+    }
+
+    public function orders($page = 'orders'){
+
+        if (!file_exists(APPPATH.'views/admin/'.$page.'.php')) {
+            show_404();
+        }
+
+        if (! $this->session->userdata('log_type')) {
+            redirect('login_admin');
+        }
+
+        $real_user =  $this->session->userdata('log_id');
+        $data['user_list'] = $this->mod_services->get_all();
+
+        $this->load->view('helper/header');
+        $this->load->view('admin/'.$page,$data);
+        $this->load->view('helper/tail');
+    }
+
+    public function sellers($page = 'sellers'){
+
+        if (!file_exists(APPPATH.'views/admin/'.$page.'.php')) {
+            show_404();
+        }
+
+        if (! $this->session->userdata('log_type')) {
+            redirect('login_admin');
+        }
+
+        $data['user_list'] = $this->mod_user->get_seller();
+
+        $this->load->view('helper/header');
+        $this->load->view('admin/'.$page,$data);
         $this->load->view('helper/tail');
     }
 }

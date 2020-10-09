@@ -18,11 +18,16 @@
                         <ul>
                             <li><a href="<?php echo base_url('index') ;?>">Home</a></li>
                             <li><a href="<?php echo base_url('services') ;?>">Services</a></li>
-                            <li><a href="<?php echo base_url('cart') ;?>">Cart</a></li>
-                            <?php
-                                if ($log_type = "Seller") {?>
-                                    <li class="active"><a href="<?php echo base_url('services/add');?>">Add Services</a></li>
-                                <?php }
+                            <?php 
+                                if ($logged_user == NULL) {
+                                }else{
+                                    $ct = base_url('cart');
+                                    $sv = base_url('services/add');
+                                    echo '<li><a href="'.$ct.'">Cart</a></li>';
+                                    if ($log_type = "Seller") {
+                                        echo '<li class="active" ><a href="'.$sv.'">Add Services</a></li>';
+                                    }
+                                }
                             ?>
                         </ul>
                     </nav>
@@ -65,7 +70,7 @@
                 </div>
             </div>
             <?php echo validation_errors(); ?>
-            <?php echo form_open('services/add'); ?>
+            <?php echo form_open_multipart('services/add'); ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                          <div class="checkout__input">
@@ -106,7 +111,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="checkout__input">
                             <div class="checkout__input">
-                            <input type="file" id="files" name="files" multiple><br><br>
+                            <input type="file" id="pict_ures" name="userfile"><br><br>
                         </div>
                         </div>
                     </div>

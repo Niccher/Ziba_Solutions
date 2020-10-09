@@ -4,10 +4,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['add/service'] = 'auth/login';
 
 $route['login'] = 'auth/login';
+$route['login_admin'] = 'auth/admin_log';
 $route['register'] = 'auth/register';
 
+$route['admin'] = 'pages/admin';
+$route['orders'] = 'pages/orders';
+$route['sellers'] = 'pages/sellers';
+
+$route['list/users'] = 'pages/admin';
+$route['list/orders'] = 'pages/orders';
+$route['list/sellers'] = 'pages/sellers';
+
 $route['services'] = 'pages/services';
+$route['services/cat/(:any)'] = 'products/cat/$1';
+
 $route['services/add'] = 'products/add';
+
 $route['cart'] = 'pages/cart';
 $route['cart/(:any)'] = 'products/cart/$1';
 $route['checkout'] = 'pages/checkout';

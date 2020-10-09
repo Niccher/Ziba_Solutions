@@ -11,11 +11,9 @@ class Auth extends CI_Controller {
 
         $this->form_validation->set_rules('form_lgeml','Email','required');
         $this->form_validation->set_rules('form_lgpwd','Password', 'required');
-        //$this->form_validation->set_rules('form_lglvl','Privileges','required');
 
         if($this->form_validation->run() === FALSE) {
             $this->load->view('helper/header');
-            //$this->load->view('template/sidebar',$titl);
             $this->load->view('all/'.$page);
             $this->load->view('helper/tail');
         }else{
@@ -48,6 +46,50 @@ class Auth extends CI_Controller {
             
         }
 	}
+
+    public function admin_log($page = 'auth'){
+
+        if (!file_exists(APPPATH.'views/admin/'.$page.'.php')) {
+            show_404();
+        }
+
+        $this->form_validation->set_rules('form_lgeml','Email','required');
+        $this->form_validation->set_rules('form_lgpwd','Password', 'required');
+
+        if($this->form_validation->run() === FALSE) {
+            $this->load->view('helper/header');
+            $this->load->view('all/'.$page);
+            $this->load->view('helper/tail');
+        }else{
+
+            $lg_eml = ($this->mod_crypt->Enc_String($this->input->post('form_lgeml')));
+            $lg_pwd = ($this->mod_crypt->Enc_String($this->input->post('form_lgpwd')));
+
+            $user_id = $this->mod_user->make_login($lg_eml,$lg_pwd);
+            $lg_name = $this->mod_user->get_name($lg_eml);
+
+            if ($user_id) {
+                $user_type = $this->mod_user->get_type($user_id);
+
+                $user_logged = array(
+                    'log_mail' => $lg_eml,
+                    'log_name' => $lg_name,
+                    'log_id' => $user_id,
+                    'log_type' => $user_type,
+                    'log_state' => "admin"
+                );
+
+                $this->session->set_userdata($user_logged);
+                
+                redirect('admin');
+
+            }else{
+                redirect('login');
+                $this->session->set_flashdata("lg_fail", "Login was unsuccesful");
+            }
+            
+        }
+    }
 
 	public function register($page = 'register'){
 

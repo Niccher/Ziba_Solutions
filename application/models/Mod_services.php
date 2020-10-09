@@ -16,6 +16,13 @@
         	return $query->result_array();
         }
 
+        public function get_like($string){
+            $reg = ucfirst($string);
+            $quiz = "SELECT * FROM tbl_Products WHERE `Category` LIKE '$string' ";
+            $query = $this->db->query($quiz);
+            return $query->result_array();
+        }
+
         public function get_at($pid){
             $this->db->where('PId',$pid);
             $query = $this->db->get('tbl_Products');
@@ -75,7 +82,7 @@
             }
         }
 
-        public function make_product($real_user){
+        public function make_product($real_user, $imgs){
             $dt = time();
             $data = array(
                 'Name' => $this->input->post('form_pdnm'),
@@ -85,7 +92,8 @@
                 'Owner' => $real_user,
                 'Description' => $this->input->post('form_pddesc'),
                 'Joined' => $dt,
-                'Category' => $this->input->post('form_pdcat')
+                'Category' => $this->input->post('form_pdcat'),
+                'Imgs' => $imgs
             );
 
             return $this->db->insert('tbl_Products', $data);

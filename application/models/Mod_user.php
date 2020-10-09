@@ -5,10 +5,16 @@
             $this->load->database();
         }
 
-        public function get_users(){
-            $this->db->where('Category',"False");
-        	$query = $this->db->get('tbl_Users');
-        	return $query->result_array();//$query->row_array();
+        public function get_seller(){
+            $this->db->where('Category',"Seller");
+            $query = $this->db->get('tbl_Users');
+            return $query->result_array();//$query->row_array();
+        }
+
+        public function get_usas(){
+            $this->db->where('Category',"Customer");
+            $query = $this->db->get('tbl_Users');
+            return $query->result_array();//$query->row_array();
         }
 
         public function get_user($user_id){
@@ -41,6 +47,17 @@
             }
         }
 
+        public function get_nam($user_id){
+            $this->db->where('UsaID',$user_id);
+            $result = $this->db->get('tbl_Users');
+
+            if ($result->num_rows()==1) {
+                return $result->row(0)->Surname;
+            }else{
+                return false;
+            }
+        }
+
         public function get_type($user_id){
             $this->db->where('UsaID',$user_id);
             $result = $this->db->get('tbl_Users');
@@ -55,6 +72,21 @@
         public function make_login($mail,$pwd){
             $this->db->where('Email',$mail);
             $this->db->where('Password',$pwd);
+
+            $result = $this->db->get('tbl_Users');
+
+            if ($result->num_rows()==1) {
+                echo $result->row(0)->UsaID;
+                return $result->row(0)->UsaID;
+            }else{
+                return false;
+            }
+        }
+
+        public function make_admin($mail,$pwd){
+            $this->db->where('Email',$mail);
+            $this->db->where('Password',$pwd);
+            $this->db->where('Category','Admin');
 
             $result = $this->db->get('tbl_Users');
 

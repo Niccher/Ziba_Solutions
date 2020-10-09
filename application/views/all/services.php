@@ -17,11 +17,16 @@
                         <ul>
                             <li class=""><a href="<?php echo base_url('home');?>">Home</a></li>
                             <li class="active"><a href="<?php echo base_url('services');?>">Services</a></li>
-                            <li><a href="<?php echo base_url('cart');?>">Cart</a></li>
-                            <?php
-                                if ($log_type = "Seller") {?>
-                                    <li><a href="<?php echo base_url('services/add');?>">Add Services</a></li>
-                                <?php }
+                            <?php 
+                                if ($logged_user == NULL) {
+                                }else{
+                                    $ct = base_url('cart');
+                                    $sv = base_url('services/add');
+                                    echo '<li><a href="'.$ct.'">Cart</a></li>';
+                                    if ($log_type = "Seller") {
+                                        echo '<li><a href="'.$sv.'">Add Services</a></li>';
+                                    }
+                                }
                             ?>
                         </ul>
                     </nav>
@@ -31,9 +36,14 @@
                         <ul>
                             <li><i class="fa fa-user"></i></li>
                         </ul>
-                        <div class="header__cart__price">Welcome: 
+                        <div class="header__cart__price">
                             <span>
-                                <?php echo $logged_user; ?>
+                                <?php 
+                                    if ($logged_user == NULL) {
+                                    }else{
+                                        echo 'Welcome: '.$logged_user; 
+                                    }
+                                ?>
                             </span>
                         </div>
                     </div>
@@ -87,8 +97,12 @@
                         <div class="sidebar__item">
                             <h4>Categories</h4>
                             <ul>
-                                <li><a href="<?php echo base_url('services/cat/vehicles') ;?>">Vehicles</a></li>
-                                <li><a href="<?php echo base_url('services/cat/property') ;?>">Property</a></li>
+                                <li <?
+                                if ($cat =='vehicles') {
+                                    echo "class='active'";
+                                }?> >
+                                    <a href="<?php echo base_url('services/cat/vehicles') ;?>">Vehicles</a></li>
+                                <li class="active" ><a href="<?php echo base_url('services/cat/property') ;?>">Property</a></li>
                                 <li><a href="<?php echo base_url('services/cat/electronic') ;?>">Electronics</a></li>
                                 <li><a href="<?php echo base_url('services/cat/fashion') ;?>">Fashion</a></li>
                                 <li><a href="<?php echo base_url('services/cat/sport') ;?>">Sports</a></li>
@@ -175,28 +189,28 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-                    <div class="product__discount">
+                    <div class="">
                         <div class="row">
-                            <div class="product__discount__slider owl-carousel">
-                                <div class="col-lg-4">
+                            
     <?php
         foreach ($work_posted as $work) : ?>
-            <div class="product__discount__item">
-                <?php $code = base_url('products/info/').$work['PId'];?>
-                <a href="<?php echo $code; ?>">
-                    <div class="product__discount__item__pic set-bg"
-                    data-setbg="<?php echo base_url('assets/imgs/repairs.jpeg') ;?>">
-                    </div>
-                    <div class="product__discount__item__text">
-                        <span><?php echo $work["Name"]; ?></span>
-                        <span><?php echo $work["Fee"]." KShs ".$work["Category"]; ?></span>
-                    </div>
-                </a>
-                
-            </div>  
+            <div class="col-lg-4">
+                <div class="">
+                    <?php $code = base_url('products/info/').$work['PId'];?>
+                    <a href="<?php echo $code; ?>">
+                        <div class="product__discount__item__pic set-bg"
+                        data-setbg="<?php echo base_url('assets/uploades/').$work['Imgs'] ;?>">
+                        </div>
+                        <div class="product__discount__item__text">
+                            <span><?php echo $work["Name"]; ?></span>
+                            <span><?php echo $work["Fee"]." KShs ".$work["Category"]; ?></span>
+                        </div>
+                    </a>
+                    
+                </div>  
+            </div>
     <?php endforeach; ?>
-                                </div>
-                            </div>
+                                
                         </div>
                     </div>
                     <div class="filter__item">

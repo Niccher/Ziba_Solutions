@@ -5,6 +5,10 @@ class Products extends CI_Controller {
 
 	public function add($page = 'add'){
 
+        if (! $this->session->userdata('log_id')) {
+            redirect('login');
+        }
+
         $this->form_validation->set_rules('form_pdnm','Name','required');
         $this->form_validation->set_rules('form_pdfee','Fee', 'required');
         $this->form_validation->set_rules('form_pdloc','Location','required');
@@ -18,9 +22,28 @@ class Products extends CI_Controller {
             $this->load->view('helper/tail');
         }else{
 
+            // Upload Image
+                $config['upload_path'] = './assets/uploades';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size'] = '2048';
+                $config['max_width'] = '2000';
+                $config['max_height'] = '2000';
+
+                $this->load->library('upload', $config);
+
+                if(!$this->upload->do_upload()){
+                    $errors = array('error' => $this->upload->display_errors());
+                    //echo $errors;
+                    $post_image = 'noimage.jpg';
+                } else {
+                    $data = array('upload_data' => $this->upload->data());
+                    $post_image = $_FILES['userfile']['name'];
+                    //$post_image = url_title($_FILES['userfile']['name']);
+                }
+
             $real_user =  $this->session->userdata('log_id');
 
-            $this->mod_services->make_product($real_user);
+            $this->mod_services->make_product($real_user,$post_image);
             $this->session->set_flashdata("User_registered", "User created succesfully");
 
             redirect('services');
@@ -73,6 +96,22 @@ class Products extends CI_Controller {
         $this->load->view('helper/tail');
 	}
 
+    public function cat($code){
+        $page = 'services';
+
+        if (!file_exists(APPPATH.'views/all/'.$page.'.php')) {
+            show_404();
+        }
+
+        $data['cat'] = $code;
+        $data['work_posted'] = $this->mod_services->get_like($code);
+        //print_r($data);
+
+        $this->load->view('helper/header');
+        $this->load->view('all/'.$page,$data);
+        $this->load->view('helper/tail');
+    }
+
 
     public function cart($PId){
 
@@ -80,13 +119,13 @@ class Products extends CI_Controller {
             show_404();
         }
 
+        if (! $this->session->userdata('log_id')) {
+            redirect('login');
+        }
+
         $real_user =  $this->session->userdata('log_id');
         $this->mod_services->get_cartin($real_user,$PId);
 
         redirect('cart');
-
-        $this->load->view('helper/header');
-        $this->load->view('all/details',$data);
-        $this->load->view('helper/tail');
     }
 }

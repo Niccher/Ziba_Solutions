@@ -13,7 +13,6 @@
                             <li class="active"><a href="<?php echo base_url('register') ;?>">Register</a></li>
                             <li><a href="<?php echo base_url('index') ;?>">Home</a></li>
                             <li><a href="<?php echo base_url('services') ;?>">Services</a></li>
-                            <li><a href="<?php echo base_url('cart') ;?>">Cart</a></li>
                         </ul>
                     </nav>
                 </div>
