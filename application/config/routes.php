@@ -6,6 +6,7 @@ $route['add/service'] = 'auth/login';
 $route['login'] = 'auth/login';
 $route['login_admin'] = 'auth/admin_log';
 $route['register'] = 'auth/register';
+$route['logout'] = 'auth/user_logout';
 
 $route['admin'] = 'pages/admin';
 $route['orders'] = 'pages/orders';

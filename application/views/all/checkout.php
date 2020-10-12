@@ -35,19 +35,33 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><i class="fa fa-user"></i></li>
-                        </ul>
-
-                        <div class="header__cart__price">
-                            <span>
+                            <li>
+                                <i class="fa fa-user">
+                                    <div class="header__cart__price">
+                                        <span>
+                                            <?php 
+                                                if ($logged_user == NULL) {
+                                                }else{
+                                                    echo 'Welcome: '.$logged_user; 
+                                                }
+                                            ?>
+                                        </span>
+                                    </div>
+                                </i>
+                            </li>
+                            <li class="checkout__order__total">
                                 <?php 
                                     if ($logged_user == NULL) {
                                     }else{
-                                        echo 'Welcome: '.$logged_user; 
+                                        $url = base_url('logout');
+                                        echo '
+                                        <a href="'.$url.'"><i class="fa fa-share">Log-Out</i></a>
+                                        '; 
                                     }
                                 ?>
-                            </span>
-                        </div>
+                            </li>
+                        </ul>
+                        
                     </div>
                 </div>
                 

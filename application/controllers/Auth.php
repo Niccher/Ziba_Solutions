@@ -138,6 +138,20 @@ class Auth extends CI_Controller {
         $this->load->view('helper/tail');
     }
 
+    public function user_logout($page = 'login'){
+
+        $this->session->unset_userdata('log_mail');
+        $this->session->unset_userdata('log_name');
+        $this->session->unset_userdata('log_id');
+        $this->session->unset_userdata('log_type');
+        $this->session->unset_userdata('log_state');
+
+        $this->session->set_flashdata("lgout_true", "Logout was succesful");
+
+        redirect('login');
+    }
+
+
     public function user_exists($user){
         $this->form_validation->set_message("user_exists","Surname Exists, Try another one");
 
